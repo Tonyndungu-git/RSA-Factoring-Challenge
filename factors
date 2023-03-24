@@ -2,14 +2,23 @@
 import sys
 
 def factorize(n):
-    for i in range(2, int(n**0.5)+1):
-        if n % i == 0:
-            return i, n//i
-    return None, None
+    """Factorizes a number n into two smaller factors."""
+    for p in range(2, n):
+        if n % p == 0:
+            return (p, n // p)
 
-filename = sys.argv[1]
-with open(filename, 'r') as f:
-    for line in f:
-        n = int(line.strip())
-        p, q = factorize(n)
-        print(f"{n}={p}*{q}")
+def main():
+    """Main function to read numbers from a file and output their factorizations."""
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} <file>")
+        return
+    
+    filename = sys.argv[1]
+    with open(filename, "r") as f:
+        for line in f:
+            n = int(line.strip())
+            p, q = factorize(n)
+            print(f"{n}={q}*{p}")
+    
+if __name__ == "__main__":
+    main()
